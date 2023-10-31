@@ -17,7 +17,7 @@ A program that tracks your time across all applications and websites from the mo
 10. From the sidebar, click "Credentials".
 11. Click "CREATE CREDENTIALS", and then "OAuth client ID".
 12. Set the type to "Desktop app", and click create.
-13. Download the JSON file, rename it to `credentials.json`, and put it and the `token.json` file in the *GoogleCalendarManager* folder.
+13. Download the JSON file, rename it to `credentials.json`, and put it in the *GoogleCalendarManager* folder.
 
 *Don't share your credentials or token with anyone as they are private.*
 
