@@ -62,13 +62,20 @@ def main():
         addEventToDB(creds, title, description, start, duration)
 
 def combineDescriptions(first, second):
+    if len(first) > 1:
+        first = first[:-1]
+    
+    if len(second) > 1:
+        second = second[:-1]
+    
     firstSegments = first.split(', ')
     secondSegments = second.split(', ')
     
     distinct = set()
     distinct.update(firstSegments)
     distinct.update(secondSegments)
-    distinct.remove('.')
+    if '.' in distinct:
+        distinct.remove('.')
 
     ret = ""
 
@@ -199,10 +206,11 @@ def addEventToDB(creds, title, description, start, duration):
 
     if len(rows):
         lastRow = rows[-1]
+        prevTitle = lastRow[1]
         prevStart = datetime.strptime(lastRow[0], DATETIMEFORMAT)
         prevDuration = float(lastRow[3])
 
-        if (prevStart + timedelta(hours = prevDuration) - start).seconds <= TIMEEPS:
+        if (prevTitle.lower() == title.lower() and prevStart + timedelta(hours = prevDuration) - start).seconds <= TIMEEPS:
             duration += prevDuration
             start = prevStart
             minTime = prevStart - timedelta(seconds = TIMEEPS)
