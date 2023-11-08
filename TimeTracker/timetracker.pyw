@@ -28,7 +28,11 @@ def getChromeURL():
     app = Application(backend = "uia").connect(process = pID, time_out = 10)
     dlg = app.top_window()
     title = "Address and search bar"
-    url = dlg.child_window(title = title, control_type = "Edit").get_value()
+    url = ""
+    try:
+        url = dlg.child_window(title = title, control_type = "Edit").get_value()
+    except:
+        url = ""
     return "https://" + url
 
 categories = {
